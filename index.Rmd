@@ -1,5 +1,5 @@
 ---
-title: "Data Visualization with GGPLOT2"
+title: "Data Visualization with ggplot2"
 subtitle: "R-Ladies St. Louis"
 author: "Meenakshi Kushwaha, October 2020"
 output:
@@ -48,12 +48,12 @@ library(tidyverse)
 ]
 ---
 # Grammar of Graphics
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 
 ![](images/tom1.png)
 ---
 # Grammar of Graphics
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 
 .pull-right[![](images/tom_data.png)]
 
@@ -64,7 +64,7 @@ library(tidyverse)
 ---
 # Grammar of Graphics
 
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 
 .pull-right[![](images/tom_mapping.png)]
 
@@ -77,7 +77,7 @@ Links variable in the data to graphical properties
 Links variable in data to panels in the plot layout
 ---
 # Grammar of Graphics
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 
 .pull-right[![](images/tom_statistics.png)]
 
@@ -91,7 +91,7 @@ Links variable in data to panels in the plot layout
 - Implicit in many plot types 
 ---
 # Grammar of Graphics
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 .pull-right[![](images/tom_scales.png)]
 
 - Help you interpret the plot
@@ -104,7 +104,7 @@ Links variable in data to panels in the plot layout
 
 ---
 # Grammar of Graphics
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 
 .pull-right[![](images/tom_geometries.png)]
 
@@ -119,7 +119,7 @@ Links variable in data to panels in the plot layout
 ---
 
 # Grammar of Graphics
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 
 .pull-right[![](images/tom_facets.png)]
 
@@ -129,7 +129,7 @@ Links variable in data to panels in the plot layout
 
 ---
 # Grammar of Graphics
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 
 .pull-right[![](images/tom_coordinates.png)]
 
@@ -139,7 +139,7 @@ Links variable in data to panels in the plot layout
 
 ---
 # Grammar of Graphics
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 
 .pull-right[![](images/tom_theme.png)]
 
@@ -201,7 +201,7 @@ ggplot(data=mpg)+ #BREAK
 ---
 
 #What did we need?
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 .pull-right[![](images/tom_need.png)]
 
 --
@@ -398,7 +398,7 @@ ggplot(data = mpg,
 `r chunk_reveal("geoms4", break_type = "auto", title="#Mulitple geoms")`
 ---
 #Scales
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 
 .pull-right[![](images/tom_facets.png)]
 .pull-left[
@@ -435,7 +435,7 @@ ggplot(mpg) +
 ```
 ---
 # Facets
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 .pull-right[![](images/tom_facets.png)]
 
 .pull-left[
@@ -587,7 +587,7 @@ ggplot(data = diamonds) +
 ```
 ---
 # Coordinates
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 .pull-right[![](images/tom_coordinates.png)]
 
 .pull-left[
@@ -624,7 +624,7 @@ ggplot(data = mpg,
 coord_polar() interprets x and y axes as radius and angle
 ---
 # Themes
-.footnote[Source: GGPlot2 workshop by @thomasp85]
+.footnote[Source: ggplot2 workshop by @thomasp85]
 .pull-right[![](images/tom_theme.png)]
 .pull-left[
 - Style changes that are not related to data
@@ -728,7 +728,7 @@ myplot+#BREAK3
 ---
 class: inverse, middle, center
 
-# BEYOND GGPLOT2
+# BEYOND ggplot2
 ---
 # Plot Composition
 .pull-right[![](images/patch.png)]
