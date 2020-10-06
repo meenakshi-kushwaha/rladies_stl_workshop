@@ -519,7 +519,6 @@ You can find out which `stat` each `geom` uses by looking at the default value o
 
 What it the default `stat` for `geom_bar`?
 ---
----
 # Statistical Transformations
 .pull-right[![](images/tom_statistics.png)]
 
@@ -695,7 +694,6 @@ Check out `ggthemes` package for many more theme options
 
 ![](images/visualization-grammar-3.png)
 ---
-
 ``` {r lables1, include=FALSE, echo=TRUE}
 ggplot(data=mpg)+ #BREAK
   aes(x=displ)+ #BREAK
@@ -708,9 +706,7 @@ ggplot(data=mpg)+ #BREAK
   labs(subtitle="This is the subtitle")+  #BREAK5
   labs(caption="Source:mpg dataset")
 ```  
-  
 `r chunk_reveal("lables1", break_type = "auto", title="##Adding labels to your plot")`
-
 ---
 ``` {r lables2, include=FALSE, echo=TRUE}
 myplot <- ggplot(data=mpg)+ 
