@@ -4,8 +4,8 @@ subtitle: "R-Ladies St. Louis"
 author: "Meenakshi Kushwaha, October 2020"
 output:
   xaringan::moon_reader:
+    css: [default, rladies, "rladies-fonts"]
     lib_dir: libs
-    css: [default, rladies, rladies-fonts]
     nature:
       ratio: 16:10
       highlightStyle: github
@@ -196,7 +196,7 @@ ggplot(data=mpg)+ #BREAK
   geom_point()
 ```
 
-`r chunk_reveal("my_cars", break_type = "auto", title="#Your first GGPLOT")`
+`r chunk_reveal("my_cars", break_type = "auto", title="#Your first ggplot")`
 ---
 
 #What did we need?
