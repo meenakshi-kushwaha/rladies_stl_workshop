@@ -5,7 +5,6 @@ author: "Meenakshi Kushwaha, October 2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: [default, rladies, rladies-fonts]
     nature:
       ratio: 16:10
       highlightStyle: github
