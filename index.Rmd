@@ -5,7 +5,7 @@ author: "Meenakshi Kushwaha, October 2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: ["default", "rladies", "rladies-fonts"]
+    css: ["default"]
     nature:
       ratio: 16:10
       highlightStyle: github
@@ -825,7 +825,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 ---
 
-#RESOURCES USED
+#Resources Used
 
 - [`flipbookr`](https://github.com/EvaMaeRey/flipbookr) package by Gina Reynolds
 
