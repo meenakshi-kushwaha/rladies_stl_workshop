@@ -6,8 +6,7 @@
     <meta name="author" content="Meenakshi Kushwaha, October 2020" />
     <script src="libs/header-attrs-2.3/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="libs/remark-css-0.0.1/rladies.css" rel="stylesheet" />
-    <link href="libs/remark-css-0.0.1/rladies-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -1284,6 +1283,17 @@ ggplot(data = mpg) +
 ---
 # Statistical Transformations
 
+.pull-right[![](images/tom_statistics.png)]
+.pull-left[
+- Linked to geometries
+
+- Every `geom` has a default `stat` and vice versa
+
+- Can use `geom_*()` and `stat_()*` are interchangeably but former is more common
+]
+---
+# Statistical Transformations
+
 
 ```r
 ggplot(data = diamonds) + 
@@ -2380,7 +2390,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 ---
 
-#RESOURCES USED
+#Resources Used
 
 - [`flipbookr`](https://github.com/EvaMaeRey/flipbookr) package by Gina Reynolds
 
