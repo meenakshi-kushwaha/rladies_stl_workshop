@@ -81,7 +81,7 @@ Hint 2: think about if the geometric features need to be inside or outside aes()
 
 * * *
 
-Using the mpg dataset draw a line chart, a boxplot, and a histogram
+Using the `mpg` dataset draw a line chart, a boxplot, and a histogram
 
 
 ### Stat
