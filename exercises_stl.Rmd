@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Source
 These exercises are borrowed and adapted from the [R for Data Science book](https://r4ds.had.co.nz/) and Thomas Pedersen's workshop on GGPLOT2. The latter is available on [youtube](https://www.youtube.com/watch?v=0m4yywqNPVY) and a great resource if you want to explore further.   
 
-# Rmd Document
+### This document
 This document contains all the code for exercises. The
 document is an RMarkdown document which means that it can be compiled, along 
 with the code chunks thus executing and capturing the output of the code within
@@ -28,7 +28,7 @@ library(maps)
 ```
 
 ### Your first ggplot
-We will explore the `mpg` dataset and make few basic plots.This dataset contains a subset of the fuel economy data that the EPA makes available on http://fueleconomy.gov. It contains only models which had a new release every year between 1999 and 2008 - this was used as a proxy for the popularity of the car. This data frame with 234 rows and 11 variables.
+We will explore the `mpg` dataset and make few basic plots.This dataset contains a subset of the fuel economy data that the EPA makes available on http://fueleconomy.gov. It contains only models which had a new release every year between 1999 and 2008 - this was used as a proxy for the popularity of the car. This data frame has 234 rows and 11 variables.
 
 
 ```{r}
@@ -52,7 +52,7 @@ ggplot(mpg) +
   geom_point(aes(x = displ, y = hwy, colour = class=="2seater"))
 ```
 
-If you simple want to set it to a value, put it outside of `aes()`
+If you simple want to set color to a single value, placed it outside of `aes()`
 
 ```{r}
 ggplot(mpg) + 
