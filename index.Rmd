@@ -396,17 +396,136 @@ ggplot(data = mpg,
 ```
 `r chunk_reveal("geoms4", break_type = "auto", title="#Mulitple geoms")`
 ---
+class:inverse, middle, center
+#Exercises
+---
+# Statistical Transformations
+
+.pull-right[![](images/tom_statistics.png)]
+.pull-left[
+- Linked to geometries
+
+- Every `geom` has a default `stat` and vice versa
+
+- Can use `geom_*()` and `stat_()*` interchangeably but former is more common
+]
+---
+# Statistical Transformations
+
+```{r fig.width=5, fig.height=4}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut))
+```
+
+--
+
+Where does count on y-axis come from?
+---
+# Statistical Transformations
+
+.pull-left[
+![](images/ggplot4.png)
+]
+.pull-right[
+
+Some plots calculate new values from the data 
+- Bar charts and histograms  
+
+- smoothing functions 
+
+- boxplots 
+]
+
+--
+
+The algorithm used to calculate new values for a graph is called a **stat**, short for statistical transformation
+
+---
+# Statistical Transformations
+
+![](images/visualization-stat-bar.png)
+
+You can find out which `stat` each `geom` uses by looking at the default value of the `stat` argument of the help page.
+
+What it the default `stat` for `geom_bar`?
+---
+
+# Statistical Transformations
+
+- Overriding default options  
+- Here, display bar chart of proportions instead of count
+
+
+```{r fig.width=5, fig.height=4}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = stat(prop), #<<
+                         group = 1))
+```
+---
+## Position Adjustments
+```{r fig.height=5}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, 
+                         colour = cut)) #<<
+```
+
+---
+## Position Adjustments
+```{r fig.height=5}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, 
+                         fill = cut)) #<<
+```
+---
+## Position Adjustments
+
+```{r fig.height=5}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, 
+                         fill = clarity)) #<<
+```
+---
+### `position="identity"`
+- places each object exactly where it falls in the context of the graph
+- useful if bars are made transparent
+
+```{r fig.height=5}
+ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + 
+  geom_bar(fill = NA, #<<
+           position = "identity") #<<
+```
+???
+The identity position adjustment is more useful for 2d geoms, like points, where it is the default.
+---
+### `position="fill"`
+- makes each set of stacked bars the same height
+- Useful for comparing proportions across groups
+```{r fig.height=5}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), 
+           position = "fill") #<<
+```
+---
+### `position="dodge"`
+- Places objects next to each other
+- Useful for comparing individual values
+```{r fig.height=5}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), 
+           position = "dodge") #<<
+```
+---
 #Scales
 .footnote[Source: ggplot2 workshop by @thomasp85]
 
-.pull-right[![](images/tom_facets.png)]
+.pull-right[![](images/tom_scales.png)]
 .pull-left[
 
 - Everything inside `aes()` will have a scale by default
 
 - `scale_<aesthetic>_<type>()`
 
-- <type> can either be a generic (continuous, discrete, or binned) or specific (e.g. area, for scaling size to circle area)
+- `<type>` can either be a generic (continuous, discrete, or binned) or specific (e.g. area, for scaling size to circle area)
 ]
 ---
 # Scales
@@ -468,122 +587,8 @@ ggplot(data = mpg) + #BREAK
 ```
 `r chunk_reveal("facets2", break_type = "auto", title="#Facets")`
 ---
-# Statistical Transformations
-
-.pull-right[![](images/tom_statistics.png)]
-.pull-left[
-- Linked to geometries
-
-- Every `geom` has a default `stat` and vice versa
-
-- Can use `geom_*()` and `stat_()*` are interchangeably but former is more common
-]
----
-# Statistical Transformations
-
-```{r fig.width=5, fig.height=4}
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut))
-```
-
---
-
-Where does count on y-axis come from?
----
-# Statistical Transformations
-
-.pull-left[
-![](images/ggplot4.png)
-]
-.pull-right[
-
-Some plots calculate new values from the data 
-- Bar charts and histograms  
-
-- smoothing functions 
-
-- boxplots 
-]
-
---
-
-The algorithm used to calculate new values for a graph is called a **stat**, short for statistical transformation
-
----
-# Statistical Transformations
-
-![](images/visualization-stat-bar.png)
-
-You can find out which `stat` each `geom` uses by looking at the default value of the `stat` argument of the help page.
-
-What it the default `stat` for `geom_bar`?
----
-# Statistical Transformations
-.pull-right[![](images/tom_statistics.png)]
-
-.pull-left[
-- Linked to geometries
-
-- Every geom has a default stat and vice versa
-
-- You can use `geom_*()` and `stat_()*` interchangeably but former is more common
-]
----
-
-# Statistical Transformations
-
-- Overriding default options  
-- Here, display bar chart of proportions instead of count
-
-
-```{r fig.width=5, fig.height=4}
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, y = stat(prop), group = 1))
-```
----
-## Position Adjustments
-```{r fig.height=5}
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, 
-                         colour = cut)) #<<
-```
-
----
-## Position Adjustments
-```{r fig.height=5}
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, 
-                         fill = cut)) #<<
-```
----
-## Position Adjustments
-
-```{r fig.height=5}
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, 
-                         fill = clarity)) #<<
-```
----
-### `position="identity"`
-- places each object exactly where it falls in the context of the graph
-- useful if bars are made transparent
-
-```{r fig.height=5}
-ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + 
-  geom_bar(fill = NA, #<<
-           position = "identity") #<<
-```
-???
-The identity position adjustment is more useful for 2d geoms, like points, where it is the default.
----
-### `position="fill"`
-- makes each set of stacked bars the same height
-- Useful for comparing proportions across groups
-```{r fig.height=5}
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, fill = clarity), 
-           position = "fill") #<<
-```
+class:inverse, middle, center
+#Exercises
 ---
 # Coordinates
 .footnote[Source: ggplot2 workshop by @thomasp85]
@@ -663,35 +668,6 @@ ggplot(data=mpg, aes(x=displ, y=hwy))+geom_point()+
 
 ???
 Check out `ggthemes` package for many more theme options
-
----
-# A `ggplot` template
-`ggplot(data = <DATA>) + `  
- ` <GEOM_FUNCTION>(`  
-     `mapping = aes(<MAPPINGS>),`  
-     `stat = <STAT>,`   
-    ` position = <POSITION>`  
-  `) +`  
- ` <COORDINATE_FUNCTION> +`  
-  `<FACET_FUNCTION>`  
-  
-*In practice, you rarely need to supply all seven parameters to make a graph because ggplot2 will provide useful defaults for everything except the data, the mappings, and the geom function.*
----
-# The layered grammar of graphics
-.footnote[R for Data Science by Hadley WickHam]
-
-![](images/visualization-grammar-1.png)
----
-# The layered grammar of graphics
-.footnote[R for Data Science by Hadley WickHam]
-
-![](images/visualization-grammar-2.png)
-
----
-# The layered grammar of graphics
-.footnote[R for Data Science by Hadley WickHam]
-
-![](images/visualization-grammar-3.png)
 ---
 ``` {r lables1, include=FALSE, echo=TRUE}
 ggplot(data=mpg)+ #BREAK
@@ -724,6 +700,38 @@ myplot+#BREAK3
 
 `r chunk_reveal("lables2", break_type = "auto", title="##GGPLOT object")`
 
+---
+
+class:inverse, middle, center
+#Exercises
+---
+# A `ggplot` template
+`ggplot(data = <DATA>) + `  
+ ` <GEOM_FUNCTION>(`  
+     `mapping = aes(<MAPPINGS>),`  
+     `stat = <STAT>,`   
+    ` position = <POSITION>`  
+  `) +`  
+ ` <COORDINATE_FUNCTION> +`  
+  `<FACET_FUNCTION>`  
+  
+*In practice, you rarely need to supply all seven parameters to make a graph because ggplot2 will provide useful defaults for everything except the data, the mappings, and the geom function.*
+---
+# The layered grammar of graphics
+.footnote[R for Data Science by Hadley WickHam]
+
+![](images/visualization-grammar-1.png)
+---
+# The layered grammar of graphics
+.footnote[R for Data Science by Hadley WickHam]
+
+![](images/visualization-grammar-2.png)
+
+---
+# The layered grammar of graphics
+.footnote[R for Data Science by Hadley WickHam]
+
+![](images/visualization-grammar-3.png)
 ---
 class: inverse, middle, center
 
@@ -776,7 +784,7 @@ p4 <- ggplot(mpg) + geom_bar(aes(class))
 ```{r fig.height=5}
 ggplot(mpg[1:20,], aes(x = displ, y = hwy)) +
   geom_point() +
-  geom_text(aes(label = model))
+  geom_text(aes(label = model)) #<<
 ```
 ---
 # Plot Annotation

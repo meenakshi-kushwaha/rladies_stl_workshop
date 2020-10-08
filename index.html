@@ -1057,17 +1057,160 @@ ggplot(data = mpg,
 
 
 ---
+class:inverse, middle, center
+#Exercises
+---
+# Statistical Transformations
+
+.pull-right[![](images/tom_statistics.png)]
+.pull-left[
+- Linked to geometries
+
+- Every `geom` has a default `stat` and vice versa
+
+- Can use `geom_*()` and `stat_()*` interchangeably but former is more common
+]
+---
+# Statistical Transformations
+
+
+```r
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut))
+```
+
+![](index_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+--
+
+Where does count on y-axis come from?
+---
+# Statistical Transformations
+
+.pull-left[
+![](images/ggplot4.png)
+]
+.pull-right[
+
+Some plots calculate new values from the data 
+- Bar charts and histograms  
+
+- smoothing functions 
+
+- boxplots 
+]
+
+--
+
+The algorithm used to calculate new values for a graph is called a **stat**, short for statistical transformation
+
+---
+# Statistical Transformations
+
+![](images/visualization-stat-bar.png)
+
+You can find out which `stat` each `geom` uses by looking at the default value of the `stat` argument of the help page.
+
+What it the default `stat` for `geom_bar`?
+---
+
+# Statistical Transformations
+
+- Overriding default options  
+- Here, display bar chart of proportions instead of count
+
+
+
+```r
+ggplot(data = diamonds) + 
+* geom_bar(mapping = aes(x = cut, y = stat(prop),
+                         group = 1))
+```
+
+![](index_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+---
+## Position Adjustments
+
+```r
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, 
+*                        colour = cut))
+```
+
+![](index_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+## Position Adjustments
+
+```r
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, 
+*                        fill = cut))
+```
+
+![](index_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+---
+## Position Adjustments
+
+
+```r
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, 
+*                        fill = clarity))
+```
+
+![](index_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+---
+### `position="identity"`
+- places each object exactly where it falls in the context of the graph
+- useful if bars are made transparent
+
+
+```r
+ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + 
+* geom_bar(fill = NA,
+*          position = "identity")
+```
+
+![](index_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+???
+The identity position adjustment is more useful for 2d geoms, like points, where it is the default.
+---
+### `position="fill"`
+- makes each set of stacked bars the same height
+- Useful for comparing proportions across groups
+
+```r
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), 
+*          position = "fill")
+```
+
+![](index_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+---
+### `position="dodge"`
+- Places objects next to each other
+- Useful for comparing individual values
+
+```r
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), 
+*          position = "dodge")
+```
+
+![](index_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+---
 #Scales
 .footnote[Source: ggplot2 workshop by @thomasp85]
 
-.pull-right[![](images/tom_facets.png)]
+.pull-right[![](images/tom_scales.png)]
 .pull-left[
 
 - Everything inside `aes()` will have a scale by default
 
 - `scale_&lt;aesthetic&gt;_&lt;type&gt;()`
 
-- &lt;type&gt; can either be a generic (continuous, discrete, or binned) or specific (e.g. area, for scaling size to circle area)
+- `&lt;type&gt;` can either be a generic (continuous, discrete, or binned) or specific (e.g. area, for scaling size to circle area)
 ]
 ---
 # Scales
@@ -1078,7 +1221,7 @@ ggplot(mpg) +
   geom_point(aes(x = displ, y = hwy, colour = class))
 ```
 
-![](index_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
 ---
 # Scales
 
@@ -1089,7 +1232,7 @@ ggplot(mpg) +
 * scale_colour_brewer(type = 'qual')
 ```
 
-![](index_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
 
 ---
 #Scales
@@ -1101,7 +1244,7 @@ ggplot(mpg) +
 * scale_y_continuous(trans = 'log10')
 ```
 
-![](index_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
 ---
 # Facets
 .footnote[Source: ggplot2 workshop by @thomasp85]
@@ -1282,143 +1425,8 @@ ggplot(data = mpg) +
 
 
 ---
-# Statistical Transformations
-
-.pull-right[![](images/tom_statistics.png)]
-.pull-left[
-- Linked to geometries
-
-- Every `geom` has a default `stat` and vice versa
-
-- Can use `geom_*()` and `stat_()*` are interchangeably but former is more common
-]
----
-# Statistical Transformations
-
-
-```r
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut))
-```
-
-![](index_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
-
---
-
-Where does count on y-axis come from?
----
-# Statistical Transformations
-
-.pull-left[
-![](images/ggplot4.png)
-]
-.pull-right[
-
-Some plots calculate new values from the data 
-- Bar charts and histograms  
-
-- smoothing functions 
-
-- boxplots 
-]
-
---
-
-The algorithm used to calculate new values for a graph is called a **stat**, short for statistical transformation
-
----
-# Statistical Transformations
-
-![](images/visualization-stat-bar.png)
-
-You can find out which `stat` each `geom` uses by looking at the default value of the `stat` argument of the help page.
-
-What it the default `stat` for `geom_bar`?
----
-# Statistical Transformations
-.pull-right[![](images/tom_statistics.png)]
-
-.pull-left[
-- Linked to geometries
-
-- Every geom has a default stat and vice versa
-
-- You can use `geom_*()` and `stat_()*` interchangeably but former is more common
-]
----
-
-# Statistical Transformations
-
-- Overriding default options  
-- Here, display bar chart of proportions instead of count
-
-
-
-```r
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, y = stat(prop), group = 1))
-```
-
-![](index_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
----
-## Position Adjustments
-
-```r
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, 
-*                        colour = cut))
-```
-
-![](index_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
-
----
-## Position Adjustments
-
-```r
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, 
-*                        fill = cut))
-```
-
-![](index_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
----
-## Position Adjustments
-
-
-```r
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, 
-*                        fill = clarity))
-```
-
-![](index_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
----
-### `position="identity"`
-- places each object exactly where it falls in the context of the graph
-- useful if bars are made transparent
-
-
-```r
-ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + 
-* geom_bar(fill = NA,
-*          position = "identity")
-```
-
-![](index_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
-???
-The identity position adjustment is more useful for 2d geoms, like points, where it is the default.
----
-### `position="fill"`
-- makes each set of stacked bars the same height
-- Useful for comparing proportions across groups
-
-```r
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, fill = clarity), 
-*          position = "fill")
-```
-
-![](index_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+class:inverse, middle, center
+#Exercises
 ---
 # Coordinates
 .footnote[Source: ggplot2 workshop by @thomasp85]
@@ -1762,39 +1770,10 @@ ggplot(data=mpg, aes(x=displ, y=hwy))+geom_point()+
   )
 ```
 
-![](index_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
 
 ???
 Check out `ggthemes` package for many more theme options
-
----
-# A `ggplot` template
-`ggplot(data = &lt;DATA&gt;) + `  
- ` &lt;GEOM_FUNCTION&gt;(`  
-     `mapping = aes(&lt;MAPPINGS&gt;),`  
-     `stat = &lt;STAT&gt;,`   
-    ` position = &lt;POSITION&gt;`  
-  `) +`  
- ` &lt;COORDINATE_FUNCTION&gt; +`  
-  `&lt;FACET_FUNCTION&gt;`  
-  
-*In practice, you rarely need to supply all seven parameters to make a graph because ggplot2 will provide useful defaults for everything except the data, the mappings, and the geom function.*
----
-# The layered grammar of graphics
-.footnote[R for Data Science by Hadley WickHam]
-
-![](images/visualization-grammar-1.png)
----
-# The layered grammar of graphics
-.footnote[R for Data Science by Hadley WickHam]
-
-![](images/visualization-grammar-2.png)
-
----
-# The layered grammar of graphics
-.footnote[R for Data Science by Hadley WickHam]
-
-![](images/visualization-grammar-3.png)
 ---
 
 count: false
@@ -2277,6 +2256,38 @@ myplot+
 
 
 ---
+
+class:inverse, middle, center
+#Exercises
+---
+# A `ggplot` template
+`ggplot(data = &lt;DATA&gt;) + `  
+ ` &lt;GEOM_FUNCTION&gt;(`  
+     `mapping = aes(&lt;MAPPINGS&gt;),`  
+     `stat = &lt;STAT&gt;,`   
+    ` position = &lt;POSITION&gt;`  
+  `) +`  
+ ` &lt;COORDINATE_FUNCTION&gt; +`  
+  `&lt;FACET_FUNCTION&gt;`  
+  
+*In practice, you rarely need to supply all seven parameters to make a graph because ggplot2 will provide useful defaults for everything except the data, the mappings, and the geom function.*
+---
+# The layered grammar of graphics
+.footnote[R for Data Science by Hadley WickHam]
+
+![](images/visualization-grammar-1.png)
+---
+# The layered grammar of graphics
+.footnote[R for Data Science by Hadley WickHam]
+
+![](images/visualization-grammar-2.png)
+
+---
+# The layered grammar of graphics
+.footnote[R for Data Science by Hadley WickHam]
+
+![](images/visualization-grammar-3.png)
+---
 class: inverse, middle, center
 
 # BEYOND ggplot2
@@ -2308,7 +2319,7 @@ p2 &lt;- ggplot(mpg) + geom_boxplot(aes(displ, hwy, group = class)) # second plo
 p1+p2 # combined plot output using patchwork package
 ```
 
-![](index_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
 
 ---
 # Plot Composition
@@ -2321,7 +2332,7 @@ p4 &lt;- ggplot(mpg) + geom_bar(aes(class))
       p4
 ```
 
-![](index_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 
 ---
 # Plot Annotation
@@ -2336,10 +2347,10 @@ p4 &lt;- ggplot(mpg) + geom_bar(aes(class))
 ```r
 ggplot(mpg[1:20,], aes(x = displ, y = hwy)) +
   geom_point() +
-  geom_text(aes(label = model))
+* geom_text(aes(label = model))
 ```
 
-![](index_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
 ---
 # Plot Annotation
 
@@ -2350,7 +2361,7 @@ ggplot(mpg[1:20,], aes(x = displ, y = hwy)) +
 * geom_text_repel(aes(label = model))
 ```
 
-![](index_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
 ---
 # Plot Annotation
 
@@ -2364,7 +2375,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
         description = 'Sports cars have large engines but small bodies, which improves their mileage')) 
 ```
 
-![](index_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
 ---
 # What next?
 
